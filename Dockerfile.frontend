@@ -4,9 +4,14 @@ FROM node:18 AS builder
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY frontend/package.json frontend/pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install
+# Copy package files
+COPY frontend/package.json ./
+
+# Generate pnpm-lock.yaml if missing (add this command)
+RUN npm install -g pnpm && pnpm install --lockfile-only  # Создает или обновляет pnpm-lock.yaml
+
+# Install dependencies (using the lock file)
+RUN pnpm install
 
 # Copy source code
 COPY frontend/ .
