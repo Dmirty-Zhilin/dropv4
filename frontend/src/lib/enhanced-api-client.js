@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getToken } from './utils'  // Assume utils has getToken function
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1'
 
@@ -103,4 +102,12 @@ export const deleteUser = async (userId) => {
 export const getDomainDetail = async (domain) => {
   const response = await api.get(`/domains/${domain}`)
   return response.data
+}
+
+export const getToken = () => {
+  return localStorage.getItem('token')
+}
+
+export const setToken = (token) => {
+  localStorage.setItem('token', token)
 }
