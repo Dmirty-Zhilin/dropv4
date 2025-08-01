@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import jwt
-import datetime
+from datetime import datetime  # Исправленный импорт
 import sqlite3
 import os
 import hashlib
@@ -154,7 +154,7 @@ def generate_token(user_id, username, role):
         'user_id': user_id,
         'username': username,
         'role': role,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1)
+        'exp': datetime.utcnow() + datetime.timedelta(days=1)
     }
     return jwt.encode(payload, app.config['JWT_SECRET_KEY'], algorithm='HS256')
 
